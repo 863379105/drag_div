@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var div = document.querySelector('div')
+        var diffX = 0, diffY = 0;//初始化差量
+        var curY = 0, curX = 0;//初始化当前div位置
+        //添加鼠标按下事件
+        div.addEventListener('mousedown', function (e) {
+            diffX = e.clientX
+            diffY = e.clientY
+            //获取当前div位置
+            curX = parseInt(getComputedStyle(div).getPropertyValue('left'))
+            curY = parseInt(getComputedStyle(div).getPropertyValue('top'))
+            //添加鼠标移动事件
+            document.addEventListener('mousemove', fn)
+        })
+        //移除鼠标移动事件
+        div.addEventListener('mouseup', function () {
+            diffX = 0;//初始化差量
+            diffY = 0;//初始化差量
+            document.removeEventListener('mousemove', fn)
+        })
+
+        function fn(e) {
+            changeDiv(div, e.clientX - diffX + curX, e.clientY - diffY + curY)
+        }
+        //封装元素位移函数
+        function changeDiv(obj, x, y) {
+            obj.style.left = x + 'px'
+            obj.style.top = y + 'px'
+        }
+
+    </script>
+</body>
+
+</html>
