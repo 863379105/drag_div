@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,10 +46,13 @@
         })
 
         function fn(e) {
-            changeDiv(div, e.clientX - diffX + curX, e.clientY - diffY + curY)
+            var x = e.clientX - diffX + curX > 0 ? e.clientX - diffX + curX : 0
+            var y = e.clientY - diffY + curY > 0 ? e.clientY - diffY + curY : 0
+            changeDiv(div, x, y)
         }
         //封装元素位移函数
         function changeDiv(obj, x, y) {
+
             obj.style.left = x + 'px'
             obj.style.top = y + 'px'
         }
