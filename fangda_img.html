@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img-wrapper .img-box {
+            display: inline-block;
+            position: relative;
+        }
+
+        .img-wrapper .img-box img {
+            border: 1px pink solid;
+        }
+
+        .img-wrapper .img-box .fangda-box {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: rgb(250, 249, 182);
+            opacity: 0.5;
+            cursor: move;
+            display: none;
+        }
+
+        .img-wrapper .img-box .img-fangda {
+            display: none;
+            width: 550px;
+            height: 550px;
+            border: solid 1px pink;
+            position: absolute;
+            left: 450px;
+            top: 0;
+            background-image: url('http://img12.360buyimg.com/n1/s450x450_jfs/t1/113689/15/13806/83369/5f27e768E6e9ea997/f2d56b2d508a4c9b.jpg');
+            background-repeat: no-repeat;
+            background-size: 150%;
+            /* background-position: -105px -20px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img-wrapper">
+        <div class="img-box">
+            <img src="http://img12.360buyimg.com/n1/s450x450_jfs/t1/113689/15/13806/83369/5f27e768E6e9ea997/f2d56b2d508a4c9b.jpg"
+                alt="">
+            <div class="fangda-box"></div>
+            <div class="img-fangda"></div>
+        </div>
+    </div>
+    <script>
+        var imgBox = document.querySelector('.img-box')
+        var img = document.querySelector('.img-box img')
+        var fangdaBox = document.querySelector('.img-wrapper .img-box .fangda-box')
+        var imgFangdaBox = document.querySelector('.img-fangda')
+
+        var sX = 0, sY = 0;
+        imgBox.addEventListener('mouseover', function () {
+            fangdaBox.style.display = 'block'
+            imgFangdaBox.style.display = 'block'
+        })
+        imgBox.addEventListener('mouseout', function () {
+            fangdaBox.style.display = 'none'
+            imgFangdaBox.style.display = 'none'
+        })
+        imgBox.addEventListener('mousemove', function (e) {
+            var x = e.pageX - this.offsetLeft
+            var y = e.pageY - this.offsetTop
+            if (x - 150 < 0) {
+                x = 150
+            } else if (x - 150 > 150) {
+                x = 300
+            }
+
+            if (y - 150 < 0) {
+                y = 150
+            } else if (y - 150 > 150) {
+                y = 300
+            }
+            x = x - fangdaBox.offsetWidth / 2
+            y = y - fangdaBox.offsetHeight / 2
+            fangdaBox.style.left = x + 'px';
+            fangdaBox.style.top = y + 'px';
+            x = (-1.8) * x;
+            y = (-1.8) * y;
+            console.log(x + 'px' + ' ' + y + 'px');
+            imgFangdaBox.style['background-position'] = x + 'px' + ' ' + y + 'px';
+        })
+
+    </script>
+</body>
+
+</html>
